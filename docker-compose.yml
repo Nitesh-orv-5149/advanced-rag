@@ -1,0 +1,23 @@
+services:
+  rag:
+    build: ./rag
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./rag:/app
+      - chroma-data:/data/chroma
+    env_file:
+      - .env
+
+  ui:
+    build: ./ui
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./ui:/app
+      - /app/node_modules
+    env_file:
+      - .env
+
+volumes:
+  chroma-data:
